@@ -25,7 +25,7 @@ SECRET_KEY = 't1as#f3*st$6ee&rvvk(7lj89d5qp^=-+g+rc$sl3veycx!w(5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+
 
 
 # Application definition
@@ -132,26 +132,27 @@ BOOTSTRAP3 = {
 }
 
 # Heroku settings
-cwd = os.getcwd()
-print("--- CWD ---\n", cwd, "\n---\n")
-if cwd == '/app' or cwd[:4] == '/tmp':
-    import dj_database_url
-    DATABASES = {
-        'default': dj_database_url.config(default='postgres://localhost')
-    }
-    
-    # Honor the 'X-Forwarded-Proto' header for request.is_secure().
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    
-    # Only allow heroku to host the project.
-    ALLOWED_HOSTS = ['*']
-    DEBUG = True
+# Update database configuration with $DATABASE_URL.
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
-    # Static asset configuration
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    STATIC_ROOT = 'staticfiles'
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static'),
-    )
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-    STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.8/howto/static-files/
+
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATIC_URL = '/static/'
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
