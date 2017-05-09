@@ -29,7 +29,7 @@ ALLOWED_HOSTS = ['*']
 SECRET_KEY = 't1as#f3*st$6ee&rvvk(7lj89d5qp^=-+g+rc$sl3veycx!w(5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 
@@ -151,7 +151,7 @@ if cwd == '/app' or cwd[:4] == '/tmp':
     
     # Only allow heroku to host the project.
     ALLOWED_HOSTS = ['*']
-    DEBUG = True
+    DEBUG = False
 
     # Static asset configuration
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
