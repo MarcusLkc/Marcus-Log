@@ -10,7 +10,8 @@
     {% for topic in topics %}
       <li>
         <h3>
-          <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+          <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }} </a> 
+          <p> <h6>{{topic.owner}} <h6></p>
         </h3>
       </li>
     {% empty %}
