@@ -2,7 +2,7 @@
 {% load bootstrap3 %}
 
 {% block content %}
-	<h2> Add a new entry to<a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }} </a></h2>
+	<h2> Add a new entry to <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }} </a></h2>
 
 	<form action="{% url 'learning_logs:new_entry' topic.id %}" method='post'
       class="form">
