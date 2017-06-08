@@ -64,7 +64,7 @@ def new_topic(request):
 def new_entry(request, topic_id):
 	"""Add a new entry."""
 	
-	topic = Topic.objects.get(id=topic_id)
+	topic = get_object_or_404(Topic,id=topic_id)
 	check_owner(request,topic)
 
 	if request.method != 'POST':
