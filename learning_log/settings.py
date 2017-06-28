@@ -21,7 +21,6 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 ALLOWED_HOSTS = ['*']
 
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -29,9 +28,7 @@ ALLOWED_HOSTS = ['*']
 SECRET_KEY = 't1as#f3*st$6ee&rvvk(7lj89d5qp^=-+g+rc$sl3veycx!w(5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-
+DEBUG = True
 
 
 # Application definition
@@ -43,11 +40,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'bootstrap3',
     'learning_logs',
     'users',
-    
+    'allauth.socialaccount.providers.facebook',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -129,13 +132,26 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#My settings
+# My settings
 LOGIN_URL = '/users/login/'
 
-#Settings for Django Boostrap3
+LOGIN_REDIRECT_URL = '/topics/'
+
+# Settings for Django Boostrap3
 BOOTSTRAP3 = {
     'include_jquery': True,
 }
+
+AUTHENTICATION_BACKENDS = (
+    
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+    
+)
+
 
 # Heroku settings
 cwd = os.getcwd()

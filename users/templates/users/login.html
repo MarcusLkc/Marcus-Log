@@ -6,6 +6,7 @@
 {% endblock header %}
 
 {% block content %}
+	
 
 	<form method="post" action="{% url 'users:login' %}" class="form">
 	{% csrf_token %}
@@ -15,7 +16,7 @@
 	{% buttons %}
 	<button name="submit" class="btn btn-primary">log in</button>
 	{% endbuttons %}
-	<input type="hidden" name="next" value="{% url 'learning_logs:index' %}" />
+	<input type="hidden" name="next" value="{% url 'learning_logs:topics' %}" />
 	</form>
 
 {% endblock content %}

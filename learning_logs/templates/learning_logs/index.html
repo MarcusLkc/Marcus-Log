@@ -1,7 +1,12 @@
 {% extends "learning_logs/base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+
 {% block header %}
+	
 	<div class='jumbotron'>
 		<h1>Track your learning.</h1>
+	<a href="/accounts/facebook/login/?process=login" ><img src="http://www.freeiconspng.com/uploads/facebook-sign-in-button-png-26.png" height="100px" width="400px"></a>
 	</div>
 {% endblock header %}
 {% block content %}
@@ -11,4 +16,5 @@
 	<h2>
 		Whenever you learn something new about a topic make an entry summarizing what you've learned.
 	</h2>
+	
 {% endblock content %}
